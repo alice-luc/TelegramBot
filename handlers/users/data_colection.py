@@ -23,10 +23,10 @@ async def email_collecting(message: types.Message, state: FSMContext):
     await asyncio.sleep(900)
     current_state = await state.get_state()
     if current_state == 'StartState:StateEmail':
-        socks_name = await state.get_data()
+        socks_data = await state.get_data()
         await message.answer(f'Дружище, я говорил, что их быстро разбирают?\
 Кажется, было такое... Так вот, за 15 минут купили уже 5 пар. Я не могу отправить операторам заказ без твоего номера\
-телефона. Твои {socks_name["socks_name"]} Нано-Носки ждут тебя!')
+телефона. Твои {socks_data["socks_name"]} Нано-Носки ждут тебя!')
 
 
 @dp.message_handler(state=StartState.StatePhone)
@@ -51,7 +51,7 @@ async def phone_number_collecting(message: types.Message, state: FSMContext):
     await asyncio.sleep(900)
     current_state = await state.get_state()
     if current_state == 'StartState:StatePhone':
-        socks_name = await state.get_data()
-        await message.answer(f'Твои {socks_name["socks_name"]} Нано-Носки ждут тебя! Тебе осталось только написать номер телефона')
+        socks_data = await state.get_data()
+        await message.answer(f'Твои {socks_data["socks_name"]} Нано-Носки ждут тебя! Тебе осталось только написать номер телефона')
 
 
